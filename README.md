@@ -6,7 +6,7 @@ API REST para conferência e controle de caixa, com autenticação JWT, contagem
 ## Funcionalidades
 - Cadastro e login de usuários (autenticação JWT)
 - Registro sequencial de quantidade de cada nota/moeda
-- Cálculo parcial e total do valor em dinheiro
+- Cálculo do valor em dinheiro
 - Revisão e edição das quantidades inseridas
 - Armazenamento dos dados em memória
 - Documentação Swagger acessível em `/api-docs`
