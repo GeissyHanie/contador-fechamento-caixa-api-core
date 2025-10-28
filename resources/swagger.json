@@ -1,0 +1,213 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Controle de Caixa",
+    "version": "1.0.0",
+    "description": "API REST para conferência e controle de caixa."
+  },
+  "tags": [
+    { "name": "Auth", "description": "Endpoints de autenticação" },
+    { "name": "Cash", "description": "Endpoints de contagem de caixa" },
+    { "name": "Review", "description": "Endpoints de revisão de contagem" }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Cadastro de usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Usuário cadastrado com sucesso" },
+          "400": { "description": "Usuário e senha obrigatórios" },
+          "409": { "description": "Usuário já existe" }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login de usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login bem-sucedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "Credenciais inválidas" }
+        }
+      }
+    },
+    "/cash/denomination": {
+      "post": {
+        "tags": ["Cash"],
+        "summary": "Registrar quantidade de nota/moeda",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": { "type": "string" },
+                  "quantity": { "type": "integer" }
+                },
+                "required": ["type", "quantity"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Quantidade registrada" },
+          "400": { "description": "Denominação ou quantidade inválida" },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
+        }
+      }
+    },
+    "/cash/result": {
+      "get": {
+        "tags": ["Cash"],
+        "summary": "Obter resultado da contagem",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Resultado da contagem",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "partials": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": { "type": "string" },
+                          "quantity": { "type": "integer" },
+                          "partial": { "type": "number" }
+                        }
+                      }
+                    },
+                    "total": { "type": "number" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
+        }
+      }
+    },
+    "/review": {
+      "get": {
+        "tags": ["Review"],
+        "summary": "Visualizar revisão da contagem",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Revisão da contagem",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "review": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": { "type": "string" },
+                          "quantity": { "type": "integer" },
+                          "partial": { "type": "number" }
+                        }
+                      }
+                    },
+                    "total": { "type": "number" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
+        }
+      }
+    },
+    "/review/denomination": {
+      "put": {
+        "tags": ["Review"],
+        "summary": "Editar quantidade de nota/moeda",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": { "type": "string" },
+                  "quantity": { "type": "integer" }
+                },
+                "required": ["type", "quantity"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Quantidade atualizada" },
+          "400": { "description": "Denominação ou quantidade inválida" },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

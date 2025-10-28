@@ -1,0 +1,15 @@
+{
+  "name": "contador-fechamento-caixa-api-core",
+  "version": "1.0.0",
+  "description": "API REST para conferência e controle de caixa",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+  "swagger-ui-express": "4.6.3"
+  }
+}
