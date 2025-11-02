@@ -6,8 +6,7 @@ Regras de Negócio 1: Acesso (Login e Cadastro)
 
 RN1.1 O acesso à aplicação deve ser restrito a usuários cadastrados.
 RN1.2 O usuário deve fornecer credenciais válidas (login e senha) para acessar o sistema.
-RN1.3 A senha deve ser armazenada de forma segura (e.g., criptografada).
-RN1.4 Deve haver uma funcionalidade para cadastro de novos usuários, permitindo que eles criem suas credenciais e acessem o sistema.
+RN1.3 Deve haver uma funcionalidade para cadastro de novos usuários, permitindo que eles criem suas credenciais e acessem o sistema.
 
 Regras de Negócio 2: Módulo de Contagem de Caixa
 
