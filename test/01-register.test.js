@@ -13,8 +13,7 @@ describe("Cadastro de Usuário", () => {
         });
 
       expect(resposta.status).to.equal(201);
-      expect(resposta.body).to.have.property("message","Usuário cadastrado com sucesso"
-      );
+      expect(resposta.body).to.have.property("message","Usuário cadastrado com sucesso");
     });
 
     it("Deve retornar 409 ao tentar cadastrar um usuário já existente", async () => {
