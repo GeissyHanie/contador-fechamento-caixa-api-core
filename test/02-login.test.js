@@ -8,7 +8,7 @@ describe("Login", () => {
             .post("/auth/login")
             .set("Content-Type", "application/json")
             .send({
-                "username": "geissy.araujo",
+                "username": "axel.araujo",
                 "password": "123456"
             });
 
@@ -16,7 +16,7 @@ describe("Login", () => {
             expect(resposta.body.token).to.be.a("string");
         });
 
-        it("Deve retornar 401 ao tentar efetuar login com credenciais válidas", async () => {
+        it("Deve retornar 401 ao tentar efetuar login com credenciais inválidas", async () => {
             const resposta = await request("http://localhost:3000")
             .post("/auth/login")
             .set("Content-Type", "application/json")
