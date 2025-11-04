@@ -8,7 +8,7 @@ describe("Cadastro de Usuário", () => {
         .post("/auth/register")
         .set("Content-Type", "application/json")
         .send({
-          username: "geissy.araujo",
+          username: "axel.araujo",
           password: "123456",
         });
 
@@ -22,7 +22,7 @@ describe("Cadastro de Usuário", () => {
           .post("/auth/register")
           .set("Content-Type", "application/json")
           .send({
-            username: "karla.heloa",
+            username: "axel.araujo",
             password: "123456",
           });
 
