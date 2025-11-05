@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "mocha ./test/**/*.test.js --timeout=20000"
+    "test": "mocha ./test/**/*.test.js --timeout=20000 --reporter mochawesome"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -15,5 +15,8 @@
     "mocha": "^11.7.4",
     "supertest": "^7.1.4",
     "swagger-ui-express": "4.6.3"
+  },
+  "devDependencies": {
+    "mochawesome": "^7.1.4"
   }
 }
