@@ -52,3 +52,31 @@ API REST para conferência e controle de caixa, com autenticação JWT, contagem
 
 ## Licença
 MIT
+
+## Testes de Performance (K6)
+
+Este projeto inclui testes de performance utilizando [K6](https://k6.io/).
+
+### Como executar os testes de performance
+
+1. Instale o K6 globalmente:
+   ```bash
+   npm install -g k6
+   ```
+   Ou baixe o binário no site oficial.
+
+2. Execute os scripts de teste localizados na pasta `performance`:
+   ```bash
+   k6 run performance/01-auth.register.test.js
+   ```
+   (Altere o nome do arquivo conforme o teste desejado)
+
+3. Para configurar a URL da API, defina a variável de ambiente `BASE_URL`:
+   ```bash
+   BASE_URL=http://localhost:3000 k6 run performance/01-auth.register.test.js
+   ```
+
+### Observações importantes
+- Os scripts de K6 usam variáveis de ambiente para facilitar a configuração.
+- Consulte os arquivos em `performance/utils` para funções auxiliares.
+- Certifique-se de que a API esteja rodando antes de executar os testes de performance.
