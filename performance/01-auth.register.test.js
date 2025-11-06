@@ -1,5 +1,6 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import { pegarBaseURL } from './utils/variaveis.js';
 
 export const options = {
     vus: 10,
@@ -12,7 +13,7 @@ export const options = {
 };
 
 export default function () {
-    const url = 'http://localhost:3000/auth/register';
+    const url = pegarBaseURL()+'/auth/register';
     const payload = JSON.stringify({
         username: `user_${Math.random()}`,
         password: "123456",

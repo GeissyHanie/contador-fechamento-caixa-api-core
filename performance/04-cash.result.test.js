@@ -1,5 +1,6 @@
 import http from "k6/http";
 import { check, sleep } from "k6";
+import { pegarBaseURL } from './utils/variaveis.js';
 
 export const options = {
   vus: 10,
@@ -12,7 +13,7 @@ export const options = {
 };
 
 export default function () {
-  const loginUrl = "http://localhost:3000/auth/login";
+  const loginUrl = pegarBaseURL() + "/auth/login";
   const loginPayload = JSON.stringify({
     username: "axel.araujo",
     password: "123456",
@@ -34,7 +35,7 @@ export default function () {
 
   const authToken = loginRes.json("token");
 
-  const resultUrl = "http://localhost:3000/cash/result";
+  const resultUrl = pegarBaseURL() + "/cash/result";
   const resultParams = {
     headers: {
       Authorization: `Bearer ${authToken}`,
