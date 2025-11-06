@@ -1,16 +1,11 @@
 const request = require("supertest");
 const { expect } = require("chai");
+const { obterToken } = require("./helpers/authentication");
 
 describe("Review Cash", () => {
   describe("PUT /review/denomination", () => {
     it("Deve retornar 200 ao realizar alteração nas denominações cadastradas", async () => {
-      const respostaLogin = await request(process.env.BASE_URL)
-        .post("/auth/login")
-        .set("Content-Type", "application/json")
-        .send({
-          username: "axel.araujo",
-          password: "123456",
-        });
+      const respostaLogin = await obterToken();
 
       const token = respostaLogin.body.token;
 
@@ -30,13 +25,7 @@ describe("Review Cash", () => {
     });
 
     it("Deve retornar 200 e retornar uma lista com valor atualizado", async () => {
-      const respostaLogin = await request(process.env.BASE_URL)
-        .post("/auth/login")
-        .set("Content-Type", "application/json")
-        .send({
-          username: "axel.araujo",
-          password: "123456",
-        });
+      const respostaLogin = await obterToken();
 
       const token = respostaLogin.body.token;
 
