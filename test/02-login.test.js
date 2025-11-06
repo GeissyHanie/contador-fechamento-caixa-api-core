@@ -4,7 +4,7 @@ const { expect } = require("chai");
 describe("Login", () => {
     describe("POST /auth/login", () => {
         it("Deve retornar 200 com token em string ao efetuar login com credenciais válidas", async () => {
-            const resposta = await request("http://localhost:3000")
+            const resposta = await request(process.env.BASE_URL)
             .post("/auth/login")
             .set("Content-Type", "application/json")
             .send({
@@ -17,7 +17,7 @@ describe("Login", () => {
         });
 
         it("Deve retornar 401 ao tentar efetuar login com credenciais inválidas", async () => {
-            const resposta = await request("http://localhost:3000")
+            const resposta = await request(process.env.BASE_URL)
             .post("/auth/login")
             .set("Content-Type", "application/json")
             .send({

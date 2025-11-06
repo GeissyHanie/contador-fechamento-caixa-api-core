@@ -4,7 +4,7 @@ const { expect } = require("chai");
 describe("Review Cash", () => {
   describe("PUT /review/denomination", () => {
     it("Deve retornar 200 ao realizar alteração nas denominações cadastradas", async () => {
-      const respostaLogin = await request("http://localhost:3000")
+      const respostaLogin = await request(process.env.BASE_URL)
         .post("/auth/login")
         .set("Content-Type", "application/json")
         .send({
@@ -14,7 +14,7 @@ describe("Review Cash", () => {
 
       const token = respostaLogin.body.token;
 
-      const resposta = await request("http://localhost:3000")
+      const resposta = await request(process.env.BASE_URL)
         .put("/review/denomination")
         .set("Authorization", "Bearer " + token)
         .send({
@@ -30,7 +30,7 @@ describe("Review Cash", () => {
     });
 
     it("Deve retornar 200 e retornar uma lista com valor atualizado", async () => {
-      const respostaLogin = await request("http://localhost:3000")
+      const respostaLogin = await request(process.env.BASE_URL)
         .post("/auth/login")
         .set("Content-Type", "application/json")
         .send({
@@ -40,7 +40,7 @@ describe("Review Cash", () => {
 
       const token = respostaLogin.body.token;
 
-      const resposta = await request("http://localhost:3000")
+      const resposta = await request(process.env.BASE_URL)
         .get("/review")
         .set("Authorization", "Bearer " + token);
 

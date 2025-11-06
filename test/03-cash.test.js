@@ -4,7 +4,7 @@ const { expect } = require("chai");
 describe("Cash", () => {
   describe("POST /cash/denomination", () => {
     it("Deve retornar 401 ao tentar registrar quantidade de notas/moedas sem token", async () => {
-      const resposta = await request("http://localhost:3000")
+      const resposta = await request(process.env.BASE_URL)
         .post("/cash/denomination")
         .unset("Authorization")
         .send({
@@ -17,7 +17,7 @@ describe("Cash", () => {
     });
 
     it("Deve retornar 403 ao tentar registrar quantidade de notas/moedas com token inválido", async () => {
-      const resposta = await request("http://localhost:3000")
+      const resposta = await request(process.env.BASE_URL)
         .post("/cash/denomination")
         .set("Authorization", "Bearer " + undefined)
         .send({
@@ -30,7 +30,7 @@ describe("Cash", () => {
     });
 
     it("Deve retornar 200 ao tentar registrar quantidade de notas/moedas com token válido", async () => {
-      const respostaLogin = await request("http://localhost:3000")
+      const respostaLogin = await request(process.env.BASE_URL)
         .post("/auth/login")
         .set("Content-Type", "application/json")
         .send({
@@ -40,7 +40,7 @@ describe("Cash", () => {
 
       const token = respostaLogin.body.token;
 
-      const resposta = await request("http://localhost:3000")
+      const resposta = await request(process.env.BASE_URL)
         .post("/cash/denomination")
         .set("Authorization", "Bearer " + token)
         .send({
@@ -56,7 +56,7 @@ describe("Cash", () => {
     });
 
     it("Deve retornar 400 ao tentar cadastrar quantidade de notas/moedas com type incorreto", async () => {
-      const respostaLogin = await request("http://localhost:3000")
+      const respostaLogin = await request(process.env.BASE_URL)
         .post("/auth/login")
         .set("Content-Type", "application/json")
         .send({
@@ -66,7 +66,7 @@ describe("Cash", () => {
 
       const token = respostaLogin.body.token;
 
-      const resposta = await request("http://localhost:3000")
+      const resposta = await request(process.env.BASE_URL)
         .post("/cash/denomination")
         .set("Authorization", "Bearer " + token)
         .send({
@@ -82,7 +82,7 @@ describe("Cash", () => {
     });
 
     it("Deve retornar 400 ao tentar cadastrar quantidade de notas/moedas com quantity incorreto", async () => {
-      const respostaLogin = await request("http://localhost:3000")
+      const respostaLogin = await request(process.env.BASE_URL)
         .post("/auth/login")
         .set("Content-Type", "application/json")
         .send({
@@ -92,7 +92,7 @@ describe("Cash", () => {
 
       const token = respostaLogin.body.token;
 
-      const resposta = await request("http://localhost:3000")
+      const resposta = await request(process.env.BASE_URL)
         .post("/cash/denomination")
         .set("Authorization", "Bearer " + token)
         .send({
@@ -108,7 +108,7 @@ describe("Cash", () => {
     });
 
     it("Deve retornar 200 com lista de notas e moedas cadastrados e valor total correto", async () => {
-      const respostaLogin = await request("http://localhost:3000")
+      const respostaLogin = await request(process.env.BASE_URL)
         .post("/auth/login")
         .set("Content-Type", "application/json")
         .send({
@@ -118,7 +118,7 @@ describe("Cash", () => {
 
       const token = respostaLogin.body.token;
 
-      const respostaType100 = await request("http://localhost:3000")
+      const respostaType100 = await request(process.env.BASE_URL)
         .post("/cash/denomination")
         .set("Authorization", "Bearer " + token)
         .send({
@@ -126,7 +126,7 @@ describe("Cash", () => {
           quantity: 2,
         });
 
-      const respostaType200 = await request("http://localhost:3000")
+      const respostaType200 = await request(process.env.BASE_URL)
         .post("/cash/denomination")
         .set("Authorization", "Bearer " + token)
         .send({
@@ -134,7 +134,7 @@ describe("Cash", () => {
           quantity: 3,
         });
 
-      const resposta = await request("http://localhost:3000")
+      const resposta = await request(process.env.BASE_URL)
         .get("/cash/result")
         .set("Authorization", "Bearer " + token)
         
